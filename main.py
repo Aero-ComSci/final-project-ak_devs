@@ -11,7 +11,7 @@ def get_coordinates(place):
     location = geolocator.geocode(place)
     if location:
         return location.latitude, location.longitude
-    return "Location not found"
+    return "Location Not Found"
 
 def get_uv_index():
     global lat, lon
@@ -41,9 +41,13 @@ def match_uv(uv_amount):
 
 while True:
     location = input("Enter your current location: ")
-    coordinates = list(get_coordinates(location))
-    lat = coordinates[0]
-    lon = coordinates[1]
-    uv = get_uv_index()
-    match_uv(uv)
-    print()
+    if get_coordinates(location) != "Location Not Found":
+        coordinates = list(get_coordinates(location))
+        lat = coordinates[0]
+        lon = coordinates[1]
+        uv = get_uv_index()
+        match_uv(uv)
+        print()
+    else:
+        print("Location not found. Exiting application")
+        break
